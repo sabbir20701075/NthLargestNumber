@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Nth Largest Number Result</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background: #1e1e1e;
+    padding: 40px 45px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 420px;
+    text-align: center;
+    color: #ffffff;
+  }
+  h1 {
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+  .result {
+    font-size: 28px;
+    font-weight: 700;
+    color: #00d1ff;
+    margin-bottom: 20px;
+  }
+  .thankyou {
+    font-style: italic;
+    color: #cccccc;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="resultHeading"></h1>
+    <div class="result" id="resultValue"></div>
+    <div class="thankyou">Thank you for using our service!</div>
+  </div>
+
+  <script>
+    const numbersList = sessionStorage.getItem("numbersList");
+    const nthNumber = sessionStorage.getItem("nthNumber");
+
+    if (!numbersList || !nthNumber) {
+      window.location.href = "index.html";
+    } else {
+      const nums = numbersList.split(",").map(n => Number(n.trim())).filter(n => !isNaN(n));
+      const n = Number(nthNumber);
+
+      nums.sort((a, b) => b - a);
+
+      const heading = document.getElementById("resultHeading");
+      const resultDiv = document.getElementById("resultValue");
+
+      if (n > nums.length) {
+        heading.textContent = `Cannot find the ${n}${getOrdinalSuffix(n)} largest number`;
+        resultDiv.textContent = `The list contains only ${nums.length} numbers.`;
+      } else {
+        heading.textContent = `The ${n}${getOrdinalSuffix(n)} largest number is:`;
+        resultDiv.textContent = nums[n - 1];
+      }
+
+      function getOrdinalSuffix(i) {
+        const j = i % 10, k = i % 100;
+        if (j == 1 && k != 11) return "st";
+        if (j == 2 && k != 12) return "nd";
+        if (j == 3 && k != 13) return "rd";
+        return "th";
+      }
+    }
+  </script>
+</body>
+</html>

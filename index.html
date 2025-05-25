@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Find the Nth Largest Number</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background: #1e1e1e;
+    padding: 35px 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    text-align: center;
+    color: #ffffff;
+  }
+  h1 {
+    margin-bottom: 25px;
+    color: #ffffff;
+  }
+  label {
+    font-weight: 600;
+    font-size: 16px;
+    display: block;
+    margin: 15px 0 6px;
+    color: #cccccc;
+    text-align: left;
+  }
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1.5px solid #444;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    outline: none;
+  }
+  button {
+    margin-top: 25px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  .note {
+    font-size: 13px;
+    color: #aaaaaa;
+    margin-top: 10px;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Enter Your Numbers List</h1>
+    <label for="numbers">List of numbers (separated by commas):</label>
+    <input type="text" id="numbers" placeholder="e.g. 12, 4, 56, 23, 8" />
+
+    <label for="nth">Select the rank of the largest number to find:</label>
+    <input type="number" id="nth" min="1" placeholder="Enter a positive integer" />
+
+    <button id="submitBtn">Submit</button>
+    <p class="note">* Please enter valid numbers separated by commas.<br>* "Nth" means: 1st largest, 2nd largest, etc.</p>
+  </div>
+
+  <script>
+    document.getElementById("submitBtn").addEventListener("click", () => {
+      const numsInput = document.getElementById("numbers").value.trim();
+      const nthInput = document.getElementById("nth").value.trim();
+
+      if (!numsInput) {
+        alert("Please enter a list of numbers.");
+        return;
+      }
+
+      if (!nthInput || nthInput <= 0) {
+        alert("Please enter a valid positive integer for N.");
+        return;
+      }
+
+      sessionStorage.setItem("numbersList", numsInput);
+      sessionStorage.setItem("nthNumber", nthInput);
+
+      window.location.href = "result.html";
+    });
+  </script>
+</body>
+</html>
